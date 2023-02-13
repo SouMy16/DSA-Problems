@@ -2,9 +2,6 @@ class Solution {
 public:
     int countOdds(int low, int high) {
         // long long int ans = 0;
-        int ans = high-low;
-        ans /= 2;
-        if(high%2 == 1 || low%2 == 1) ans++;
-        return ans;
+        return ((high-low)/2 + ((high%2==1 || low%2==1)?1:0));
     }
 };
