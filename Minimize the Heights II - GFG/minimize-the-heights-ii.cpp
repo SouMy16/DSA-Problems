@@ -14,7 +14,7 @@ class Solution {
         sort(a, a+n);
         int i=0;
         int ans = a[n-1] - a[0];
-        for(int j=0; j<n-1; j++)
+        for(int j=0; j<n; j++)
         {
             if(a[j+1] < k) continue;
             int lmax = a[j]+k;
