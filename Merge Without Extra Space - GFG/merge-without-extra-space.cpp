@@ -18,13 +18,10 @@ class Solution{
                 if(arr1[i] > arr2[j])
                 {
                     swap(arr1[n-1-x], arr2[j]);
-                    // cout<<"Swapped: "<<arr1[n-1-x]<<" "<<arr2[j]<<'\n';
                     j++;
                     x++;
                 }
                 else if(arr1[i] <= arr2[j]) i++;
-                // else if(arr1[i] == arr2[j]) i++, j++;
-                // i++, j++;
             }
             sort(arr1, arr1+n);
             sort(arr2, arr2+m);
