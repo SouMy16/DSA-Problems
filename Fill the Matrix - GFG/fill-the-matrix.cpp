@@ -11,8 +11,7 @@ class Solution{
 public:
     int minIteration(int N, int M, int x, int y){    
         // code here
-        x--, y--;
-        return max(x+y, max(N-1-x+M-1-y, max(x+M-1-y, y+N-1-x)));
+        return max(x+y-2, max(N-1-x+M-1-y+2, max(x+M-1-y, y+N-1-x)));
     }
 };
 
