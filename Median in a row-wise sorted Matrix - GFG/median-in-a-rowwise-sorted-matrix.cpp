@@ -47,10 +47,7 @@ public:
         int n = r*c;
         n++;
         n /= 2;
-        map<int,int> m;
-        for(int i=0; i<r; i++) 
-            for(int j=0; j<c; j++) 
-                m[matrix[i][j]] = 1;
+        
         while(low <= high)
         {
             mid = low+(high-low)/2;
@@ -68,7 +65,7 @@ public:
                 low = mid+1;
             else if(less + equal >= n && more + equal >= n) 
             {
-                if(m[mid] == 1) 
+                if(equal != 0) 
                     return mid;
                 else if(more > less) less = mid+1;
                 else high = mid-1;
