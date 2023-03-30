@@ -17,7 +17,16 @@ public:
             string y1 = s2.substr(i,n);
             string x2 = s2.substr(n-i,i);
             string y2 = s2.substr(0, n-i);
-            ans = ans || (isScramble(x,x1)&&isScramble(y,y1)) || (isScramble(x,x2)&&isScramble(y,y2));
+            if((isScramble(x,x1)&&isScramble(y,y1)))
+            {
+                m[key] = true;
+                return true;
+            }
+            if((isScramble(x,x2)&&isScramble(y,y2)))
+            {
+                m[key] = true;
+                return true;
+            }
         }
         m[key] = ans;
         return ans;
