@@ -2,12 +2,14 @@ class Solution {
 public:
     map<string, bool> m;
     bool isScramble(string s1, string s2) {
-        if(s1.size()==0 || s1.size() != s2.size()) return false;
-        if(s1.size()==1 && s1!=s2) return false;
-        if(s1 == s2) return true;
-        bool ans = false;
         string key = s1+" "+s2;
         if(m.find(key)!=m.end()) return m[key];
+        if(s1 == s2) 
+        {
+            m[key] = true;
+            return true;
+        }
+        bool ans = false;
         int n = s1.size();
         for(int i=1; i<n; i++)
         {
