@@ -28,7 +28,7 @@ public:
                 return true;
             }
         }
-        m[key] = ans;
-        return ans;
+        m[key] = false;
+        return false;
     }
 };
