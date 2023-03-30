@@ -39,7 +39,7 @@ class Solution {
         {
             long long int cur = A[i];
             cur *= N;
-            if(ans > A[i] && A[i]>=S) ans = A[i];
+            if(ans > A[i] && A[i]>=(S+N-1)/N) ans = A[i];
         }
         return ans;
     }
