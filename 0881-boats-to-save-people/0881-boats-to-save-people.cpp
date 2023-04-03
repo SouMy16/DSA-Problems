@@ -6,22 +6,12 @@ public:
         int ans = 0;
         while(i<=j)
         {
-            if(people[i]+people[j]>limit)
-            {
-                ans++;
-                j--;
-            }
-            else if(people[i]+people[j]<=limit)
-            {
-                ans++;
-                i++;
-                j--;
-            }
-            if(i==j && people[i]<limit)
+            ans++;
+            if(people[i]+people[j]<=limit)
             {
                 i++;
-                ans++;
             }
+            j--;
         }
         return ans;
     }
