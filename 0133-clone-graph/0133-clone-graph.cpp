@@ -20,17 +20,15 @@ public:
 */
 
 class Solution {
-public:
     map<Node*, Node*> m;
+public:
     Node* cloneGraph(Node* node) {
         if(node==NULL) return NULL;
         if(m.find(node) != m.end()) return m[node];
         Node *ans = new Node(node->val);
         m[node] = ans;
-        for(int i=0; i<node->neighbors.size(); i++)
-        {
+        for(int i=0; i<node->neighbors.size(); i++) 
             ans->neighbors.push_back(cloneGraph(node->neighbors[i]));
-        }
         return ans;
     }
 };
