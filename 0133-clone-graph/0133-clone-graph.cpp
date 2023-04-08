@@ -20,7 +20,7 @@ public:
 */
 
 class Solution {
-    map<Node*, Node*> m;
+    unordered_map<Node*, Node*> m;
 public:
     Node* cloneGraph(Node* node) {
         if(node==NULL) return NULL;
