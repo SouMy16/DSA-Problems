@@ -1,58 +1,34 @@
 class Solution {
 public:
-    bool isBarpatite1(vector<vector<int>>&graph, int i, vector<int>&color)
+    bool dfs(vector<vector<int>> &graph, int p, vector<int> &vis, vector<int> &col)
     {
-        color[i]=1;
-        queue<pair<int,int>> q;
-        q.push({i,-1});
-        while(!q.empty())
+        if(vis[p]) return true;
+        vis[p] = 1;
+        bool ans = true;
+        for(int i=0; i<graph[p].size(); i++)
         {
-            int cur = q.front().first;
-            int par = q.front().second;
-            q.pop();
-            if(par==-1) color[cur] = 1;
-            else if(color[cur] == color[par]) return false;
-            else color[cur] = 1-color[par];
-            for(int j=0;j<graph[cur].size();j++)
+            if(col[graph[p][i]]==col[p]) return false;
+            else if(!vis[graph[p][i]])
             {
-                if(color[graph[cur][j]]==-1)
-                {
-                    q.push({graph[cur][j],cur});
-                } else if(color[graph[cur][j]]==color[cur]) return false;
+                col[graph[p][i]] = 1^col[p];
+                ans = (ans & dfs(graph, graph[p][i], vis, col));
             }
         }
-        return true;
+        return ans;
     }
-    
-    
-    bool isBarpartite2(vector<vector<int>>& graph,int i,vector<int> &color){
-        if(color[i]==-1) color[i]=1;
-        for(int j=0;j<graph[i].size();j++)
-        {
-            if(color[graph[i][j]]==-1){
-                color[graph[i][j]]=1-color[i];
-                if(!isBarpartite2(graph, graph[i][j], color)) return false;
-            }
-            else if(color[i] == color[graph[i][j]]) return false;
-        }
-        return true;
-    }
-    
-    
-    bool isBipartite(vector<vector<int>>& graph) 
-    {   
-        vector<int> color(graph.size(),-1);   
+    bool isBipartite(vector<vector<int>>& graph) {
+        bool ans = true;
         int n = graph.size();
-        for(int i=0;i<n;i++)
+        vector<int> color(n, -1);
+        vector<int> vis(n, 0);
+        for(int i=0; i<n; i++)
         {
-            if(color[i]==-1)
+            if(vis[i]==0) 
             {
-                if(!isBarpatite1(graph, i, color))
-                {
-                    return false;
-                }
+                color[i] = 0;
+                ans &= dfs(graph, i, vis, color);
             }
         }
-        return true;
+        return ans;
     }
 };
