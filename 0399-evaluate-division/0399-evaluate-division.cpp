@@ -1,6 +1,6 @@
 class Solution {
 public:
-    double dfs(string a, string c, map<string, vector<pair<string, double>>> &g, map<string, int> &vis)
+    double dfs(string a, string c, unordered_map<string, vector<pair<string, double>>> &g, unordered_map<string, int> &vis)
     {
         if(a == c) return 1.0;
         double ans = 0;
@@ -26,19 +26,19 @@ public:
     vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
         int n = queries.size();
         vector<double> ans(n);
-        map<string, vector<pair<string, double>>> graph;
+        unordered_map<string, vector<pair<string, double>>> graph;
         for(int i=0; i<equations.size(); i++)
         {
             graph[equations[i][0]].push_back({equations[i][1], values[i]});
             double d = 1.0/values[i];
-            cout<<d<<" ";
+            // cout<<d<<" ";
             graph[equations[i][1]].push_back({equations[i][0], d});
         }
         for(int i=0; i<queries.size(); i++)
         {
             string a = queries[i][0], c = queries[i][1];
             // int n = graph.size();
-            map<string, int> vis;
+            unordered_map<string, int> vis;
             if(graph[a].size()==0 || graph[c].size()==0)
             {
                 ans[i] = -1;
