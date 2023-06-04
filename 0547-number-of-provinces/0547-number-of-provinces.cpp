@@ -6,7 +6,7 @@ public:
         vis[pos] = 1;
         for(int i=0; i<g[pos].size(); i++)
         {
-            if(i!=pos && g[pos][i] == 1) traverse(i, g, vis);
+            if(i!=pos && g[pos][i] == 1 && vis[i]==0) traverse(i, g, vis);
         }
         return;
     }
