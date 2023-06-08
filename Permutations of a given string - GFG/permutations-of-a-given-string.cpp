@@ -6,52 +6,42 @@ using namespace std;
 class Solution
 {
 	public:
-	    string
-nextPermutation (string s)
-{
-  int f = 0;
-  for (int i = s.size () - 2; i >= 0; i--)
-    {
-      if (s[i] < s[i + 1])
-	{
-	  sort (s.begin () + (i+1), s.end ());
-	  for(int j=i+1; j<s.size(); j++)
-	  {
-	      if(s[j]>s[i]) {swap(s[i], s[j]); break;}
-	  }
-	  f = 1;
-	  break;
-	}
-    }
-  if (f == 0)
-    sort (s.begin (), s.end ());
-//   cout<<s<<'\n';
-
-  return s;
-}
-
-vector<string> find_permutation (string s)
-{
-  vector < string > ans;
-  sort (s.begin (), s.end ());
-  string ss = s;
-  ans.push_back (ss);
-  ss = nextPermutation (ss);
-  while (ss != s)
-    {
-      ans.push_back (ss);
-      string temp = nextPermutation (ss);
-      if (temp == ss)
-	break;
-      ss = temp;
-    }
-  return ans;
-    // for(int i=0; i<ans.size(); i++)
-    // {
-    //     cout<<ans[i]<<'\n';
-    // }
-    // return;
-}
+	    void findPermutations(map<char, int> v, string cur, vector<string> &ans)
+	    {
+	        int f = 0;
+	        for(auto e:v)
+	        {
+	            if(e.second > 0)
+	            {
+	                f = 1;
+	                v[e.first]--;
+	                cur += e.first;
+	                findPermutations(v, cur, ans);
+	                cur.pop_back();
+	                v[e.first]++;
+	            }
+	        }
+	        if(f == 0)
+	        {
+	           // cout<<cur<<'\n';
+	            ans.push_back(cur);
+	            return;
+	        }
+	        return;
+	    }
+	    
+		vector<string> find_permutation(string s)
+		{
+		    // Code here there
+		    vector<string> ans;
+		    map<char, int> v;
+		    for(int i=0; i<s.size(); i++)
+		    {
+		        v[s[i]]++;
+		    }
+		    findPermutations(v, "", ans);
+		    return ans;
+		}
 };
 
 
