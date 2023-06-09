@@ -1,14 +1,15 @@
 class Solution {
 public:
     char nextGreatestLetter(vector<char>& letters, char target) {
-        int low=0, high=letters.size();
-        if(target >= letters.back()) return letters[0];
-        while(low<high)
-        {
-            int mid = low+(high-low)/2;
-            if(letters[mid] > target) high = mid;
-            else low = mid+1;
+        int left = 0, right = letters.size() - 1, mid;
+        while (left <= right) {
+            mid = (left + right) / 2;
+            if (letters[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
-        return letters[low];
+        return left == letters.size() ? letters[0] : letters[left];
     }
 };
