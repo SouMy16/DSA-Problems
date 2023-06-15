@@ -6,30 +6,31 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    int checkLen(string & s, int l, int r)
-    {
-        while(l >= 0 && r < s.length() && s[l] == s[r]) l--, r++;
-        return r - l - 1;
-    }
-  
-    string longestPalin(string s) {
-       
-        int ans = 0, st = 0;
-        for(int i = 0; i<s.length(); i++)
+    string longestPalin (string s) {
+        // code here
+        int n = s.size(); 
+        string ans = "";
+        int len = 0;
+        for(int i=0; i<n; i++)
         {
-            int len1 = checkLen(s, i, i);
-            int len2 = checkLen(s, i , i+1);
-            
-            int len = max(len1, len2);
-            if(len > ans)
+            int j = 0;
+            while(i-j>=0 && i+j<n && s[i-j] == s[i+j]) j++;
+            j--;
+            if(2*j+1 > len)
             {
-                ans = len;
-                st = i - (len - 1)/2;
+                len = 2*j+1;
+                ans = s.substr(max(0, i-j), len);
+            }
+            j = 0;
+            while(i-1-j>=0 && i+j<n && s[i-1-j] == s[i+j]) j++;
+            j--;
+            if(2*(j+1) > len)
+            {
+                len = 2*(j+1);
+                ans = s.substr(max(0, i-j-1), len);
             }
         }
-        
-        return s.substr(st, ans);
-       
+        return ans;
     }
 };
 
