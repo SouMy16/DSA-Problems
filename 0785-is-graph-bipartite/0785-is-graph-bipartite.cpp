@@ -1,34 +1,40 @@
 class Solution {
 public:
-    bool dfs(vector<vector<int>> &graph, int p, vector<int> &vis, vector<int> &col)
+    bool BFS(vector<vector<int>> &g, vector<int> &col, int n, int pos, vector<int> &vis)
     {
-        if(vis[p]) return true;
-        vis[p] = 1;
-        bool ans = true;
-        for(int i=0; i<graph[p].size(); i++)
+        queue<pair<int, int>> q;
+        q.push({pos, 0});
+        // vis[pos] = 1;
+        // col[pos] = 0;
+        while(!q.empty())
         {
-            if(col[graph[p][i]]==col[p]) return false;
-            else if(!vis[graph[p][i]])
+            int cur = q.front().first;
+            int c = q.front().second;
+            q.pop();
+            if(vis[cur]==1 && col[cur] != c) 
             {
-                col[graph[p][i]] = 1^col[p];
-                ans = (ans & dfs(graph, graph[p][i], vis, col));
+                // cout<<cur<<" "<<col[cur]<<"\n";
+                return false;
             }
+            if(vis[cur] == 1) continue;
+            col[cur] = c;
+            vis[cur] = 1;
+            for(int i=0; i<g[cur].size(); i++)  if(!vis[g[cur][i]]) q.push({g[cur][i], c^1});
         }
-        return ans;
+        return true;
     }
+    
     bool isBipartite(vector<vector<int>>& graph) {
-        bool ans = true;
         int n = graph.size();
-        vector<int> color(n, -1);
+        vector<int> col(n, -1);
         vector<int> vis(n, 0);
-        for(int i=0; i<n; i++)
+        for(int i=0; i<n; i++) if(!vis[i]) 
         {
-            if(vis[i]==0) 
+            if(vis[i]==0 && !BFS(graph, col, n, i, vis)) 
             {
-                color[i] = 0;
-                ans &= dfs(graph, i, vis, color);
+                return false;
             }
         }
-        return ans;
+        return true;
     }
 };
