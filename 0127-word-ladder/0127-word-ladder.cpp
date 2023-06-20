@@ -26,7 +26,7 @@ public:
     // }
     
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        map<string, int> m, dp, vis;
+        unordered_map<string, int> m, vis;
         int ans = 0;
         for(int i=0; i<wordList.size(); i++) m[wordList[i]]=1;
         queue<string> q;
