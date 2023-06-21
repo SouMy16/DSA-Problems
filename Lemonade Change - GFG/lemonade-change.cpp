@@ -21,8 +21,7 @@ class Solution {
                 if(a==0) return false;
                 else if(a<3 && b==0) return false;
                 else if(b>0) b--, a--;
-                else if(a>2) a-=3;
-                else return false;
+                else a-=3;
             }
         }
         return true;
