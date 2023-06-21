@@ -8,9 +8,9 @@ public:
         dp[i] = 0;
         for(int j=0; j<g[i].size(); j++)
         {
-            ans &= DFS(g[i][j], g, vis, dp);
+            if(!DFS(g[i][j], g, vis, dp)) return dp[i] = false;
         }
-        return dp[i] = (ans==true);
+        return dp[i] = true;
     }
     
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
