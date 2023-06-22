@@ -18,7 +18,6 @@ public:
         
         if(dp[ind][1] != -1) return dp[ind][1];
         int sell, notSell;
-        // if(m[ind].find(b) != m[ind].end()) return m[ind][b];
         sell = a[ind]-fee+solve(a, fee, ind+1, -1, dp);
         notSell = solve(a, fee, ind+1, 0, dp);
         return dp[ind][1] = max(sell, notSell);
@@ -27,7 +26,14 @@ public:
     int maxProfit(vector<int>& prices, int fee) {
         vector<vector<int>> dp(prices.size()+1, vector<int>(2, -1));
         // unordered_map<int, map<int,int>> m;
-        return solve(prices, fee, 0, -1, dp);
+        int i0=0, i1=0;
+        for(int i=prices.size()-1; i>=0; i--)
+        {
+            i0 = max(i0, i1-prices[i]);
+            i1 = max(i1, i0+prices[i]-fee);
+        }
+        return i0;
+        // return solve(prices, fee, 0, -1, dp);
         // int s0 = 0, s1 = INT_MIN; 
         // for(int p:prices) {
         //     int tmp = s0;
