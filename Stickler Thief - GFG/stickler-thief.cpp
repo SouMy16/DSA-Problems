@@ -20,9 +20,17 @@ class Solution
     int FindMaxSum(int arr[], int n)
     {
         // Your code here
-        int ans = 0;
-        vector<int> dp(n, -1);
-        return solve(arr, n, 0, ans, dp);
+        // int ans = 0;
+        // vector<int> dp(n, -1);
+        // return solve(arr, n, 0, ans, dp);
+        int takethis = 0, nottakethis = 0, nottakeprev = 0;
+        for(int i=0; i<n; i++)
+        {
+            nottakethis = max(nottakeprev, takethis);
+            takethis = nottakeprev + arr[i];
+            nottakeprev = nottakethis;
+        }
+        return max(takethis, nottakethis);
     }
 };
 
