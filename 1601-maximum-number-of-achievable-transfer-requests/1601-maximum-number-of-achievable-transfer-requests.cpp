@@ -1,28 +1,22 @@
 class Solution {
 public:
-    int maximumRequests(int n, vector<vector<int>>& requests) {
-        int len = requests.size();
-        int total = pow(2, len);
-        int maxi = 0;
-        vector<int> res;
-        for(int i =0;i<=total;i++){
-            vector<int> req;
-            for(int j = 0;j<len;j++){
-                if((i>>j)&1) req.push_back(j);
-            }
-            vector<int> degree(n,0);
-            for(auto j:req){
-                degree[requests[j][0]]++;
-                degree[requests[j][1]]--;
-            }
-            for(auto j:degree) {
-                if(j!=0) {
-                    req.clear();
-                    break;
-                }
-            }
-            maxi = max(maxi,(int)req.size());
+    int inout[20];
+    int solve(int ind, vector<vector<int>>& a)
+    {
+        if(ind == a.size())
+        {
+            for(int i=0; i<20; i++) if(inout[i] != 0) return -1e5;
+            return 0;
         }
-        return maxi;
+        int nottake = solve(ind+1, a);
+        inout[a[ind][0]]++, inout[a[ind][1]]--;
+        int take = 1+solve(ind+1, a);
+        inout[a[ind][0]]--, inout[a[ind][1]]++;
+        return max(take, nottake);
+    }
+    
+    int maximumRequests(int n, vector<vector<int>>& requests) {
+        for(int i=0; i<20; i++) inout[i] = 0;
+        return solve(0, requests);
     }
 };
