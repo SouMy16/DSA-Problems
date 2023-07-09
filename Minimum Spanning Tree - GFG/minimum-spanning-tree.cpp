@@ -45,37 +45,63 @@ class Solution
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int n, vector<vector<int>> adj[])
     {
-        // code here
-        vector<vector<pair<int,int>>> g(n);
+        // Prim's Algorithm
+        
+        // vector<vector<pair<int,int>>> g(n);
+        // for(int i=0; i<n; i++)
+        // {
+        //     for(int j=0; j<adj[i].size(); j++)
+        //     {
+        //         g[i].push_back({adj[i][j][1], adj[i][j][0]});
+        //     }
+        // }
+        // priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+        // pq.push({0, 0});
+        // int ans = 0;
+        // vector<int> vis(n, 0);
+        // while(!pq.empty())
+        // {
+        //     int cur = pq.top().second;
+        //     int w = pq.top().first;
+        //     pq.pop();
+        //     if(vis[cur] == 1) continue;
+        //     else {
+        //         vis[cur] = 1;
+        //         ans += w;
+        //     }
+        //     for(int i=0; i<g[cur].size(); i++) if(!vis[g[cur][i].second]) pq.push(g[cur][i]);
+        // }
+        
+        
+        
+        
+        
+        
+        // Kruskal's Algorithm
+        
+        vector<vector<int>> v;
         for(int i=0; i<n; i++)
         {
             for(int j=0; j<adj[i].size(); j++)
             {
-                g[i].push_back({adj[i][j][1], adj[i][j][0]});
+                vector<int> cur;
+                cur.push_back(adj[i][j][1]);
+                cur.push_back(i);
+                cur.push_back(adj[i][j][0]);
+                v.push_back(cur);
             }
         }
-        
-        // Prim's Algorithm
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
-        pq.push({0, 0});
+        sort(v.begin(), v.end());
+        DSU d(n);
         int ans = 0;
-        vector<int> vis(n, 0);
-        while(!pq.empty())
+        for(int i=0; i<v.size(); i++)
         {
-            int cur = pq.top().second;
-            int w = pq.top().first;
-            pq.pop();
-            if(vis[cur] == 1) continue;
-            else {
-                vis[cur] = 1;
-                ans += w;
+            if(d.findPar(v[i][1]) != d.findPar(v[i][2]))
+            {
+                ans += v[i][0];
+                d.Union(v[i][1], v[i][2]);
             }
-            for(int i=0; i<g[cur].size(); i++) if(!vis[g[cur][i].second]) pq.push(g[cur][i]);
         }
-        
-        
-        
-        // Kruskal's A
         return ans;
     }
 };
