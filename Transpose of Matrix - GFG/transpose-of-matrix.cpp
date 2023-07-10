@@ -7,22 +7,17 @@ class Solution
 {   
     public:  
     //Function to find transpose of a matrix.
-    void transpose(vector<vector<int> >& matrix, int n)
+    void transpose(vector<vector<int> >& mat, int n)
     { 
         // code here 
         vector<vector<int>> trans(n, vector<int>(n));
         for(int i=0; i<n; i++)
         {
-            for(int j=0; j<n; j++)
+            for(int j=i; j<n; j++)
             {
-                trans[i][j] = matrix[j][i];
-            }
-        }
-        for(int i=0; i<n; i++)
-        {
-            for(int j=0; j<n; j++)
-            {
-                matrix[i][j] = trans[i][j];
+                int c = mat[i][j];
+                mat[i][j] = mat[j][i];
+                mat[j][i] = c;
             }
         }
         return;
