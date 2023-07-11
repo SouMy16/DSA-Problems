@@ -1,62 +1,57 @@
-struct Node{
-    Node* a[26];
-    bool flag = false;
+class TrieNode {
+    private:
+    public:
+        vector<TrieNode*> a;
+        bool end;
+        TrieNode() {
+            a.resize(26, NULL);
+            end = false;
+        }
 };
 
 class Trie {
+    TrieNode* root;
 public:
-    Node* root;
     Trie() {
-        root = new Node();
-        for(int i=0; i<26; i++)
-        {
-            root->a[i] = NULL;
-        }
+        root = new TrieNode();
     }
     
     void insert(string word) {
-        Node* cur = root;
+        TrieNode* cur = root;
         for(int i=0; i<word.size(); i++)
         {
-            if(cur->a[word[i]-'a'] == NULL)
+            if(cur->a[word[i]-'a']==NULL)
             {
-                cur->a[word[i]-'a'] = new Node();
-                for(int j=0; j<26; j++)
-                {
-                    cur->a[word[i]-'a']->a[j] = NULL;
-                }
+                cur->a[word[i]-'a'] = new TrieNode();
             }
             cur = cur->a[word[i]-'a'];
         }
-        cur->flag = true;
-        return;
+        cur->end = true;
     }
     
     bool search(string word) {
-        Node* cur = root;
+        TrieNode* cur = root;
         for(int i=0; i<word.size(); i++)
         {
-            if(cur->a[word[i]-'a'] == NULL)
+            if(cur->a[word[i]-'a']==NULL)
             {
                 return false;
             }
             cur = cur->a[word[i]-'a'];
         }
-        if(cur->flag != true) return false;
-        return true;
+        return cur->end == true;
     }
     
     bool startsWith(string word) {
-        Node* cur = root;
+        TrieNode* cur = root;
         for(int i=0; i<word.size(); i++)
         {
-            if(cur->a[word[i]-'a'] == NULL)
+            if(cur->a[word[i]-'a']==NULL)
             {
                 return false;
             }
             cur = cur->a[word[i]-'a'];
         }
-        // if(flag[cur] != true) return false;
         return true;
     }
 };
