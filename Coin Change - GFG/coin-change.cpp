@@ -5,29 +5,31 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    long long int count(int S[], int m, int n) 
-    {
+    long long int solve(int coins[], int amount, vector<vector<long long int>> &dp, int ind, int n){
+        if(amount == 0) return 1LL*1;
+        if(ind >= n) return 0;
+        if(dp[ind][amount] != -1) return dp[ind][amount];
+        long long int x = 0;
+        if(amount>=coins[ind]) x += solve(coins, amount-coins[ind], dp, ind, n);
+        x += solve(coins, amount, dp, ind+1, n);
+        return dp[ind][amount] = x;
+    }
+    
+    long long int count(int coins[], int N, int sum) {
         // code here.
-        vector<vector<long long int>> dp(m,vector<long long int>(n+1,0));
-        // long long int ans = Coins(S,dp,m-1,n);
-        for(int i=0;i<m;i++) dp[i][0]=1;
+        vector<vector<long long int>> dp(N+1, vector<long long int>(sum+1, 0));
+        // return solve(coins, sum, dp, 0, N);
         
-        for(int i=0;i<m;i++)
-        {
-            for(int j=1;j<=n;j++)
-            {
-                if(S[i]<=j){
-                    dp[i][j]+=(dp[i][j-S[i]]);
-                }
-                // else{
-                    if(i>0) dp[i][j]+=dp[i-1][j];
-                // }
+        for(int i=0; i<=N; i++) dp[i][0] = 1;
+        for(int i=1; i<=N; i++){
+            for(int j=1; j<=sum; j++){
+                if(j >= coins[i-1]) dp[i][j] += dp[i][j-coins[i-1]];
+                dp[i][j] += dp[i-1][j];
             }
         }
-        return dp[m-1][n];;
+        return dp[N][sum];
     }
 };
-
 
 //{ Driver Code Starts.
 int main() {
