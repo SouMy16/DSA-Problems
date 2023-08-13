@@ -1,11 +1,11 @@
 class Solution {
 public:
-    unordered_map<int, unordered_map<int,int>> dp;
+    vector<vector<int>> dp;
     bool solve(vector<int> &nums, int st, int ind) {
         if(st==ind && ind>=nums.size()) return true;
         if(ind>=nums.size()) return false;
         bool ans = false;
-        if(dp[ind].find(st) != dp[ind].end()) return dp[ind][st];
+        if(dp[ind][ind-st] != -1) return dp[ind][ind-st];
         if(ind == st) {
             ans |= solve(nums, st, ind+1);
         }
@@ -22,7 +22,7 @@ public:
             }
             else{
                 // wrna to false hi h
-                return dp[ind][st] = false;
+                return dp[ind][ind-st] = false;
             }
         }
         if(ind == st+2){
@@ -34,12 +34,13 @@ public:
                 // 3 consecutive increasing h to lelo bs
                 ans |= solve(nums, ind+1, ind+1);
             }
-            else /*wrna false*/ return dp[ind][st] = false;
+            else /*wrna false*/ return dp[ind][ind-st] = false;
         }
-        return dp[ind][st] = ans;
+        return dp[ind][ind-st] = ans;
     }
 
     bool validPartition(vector<int>& nums) {
+        dp = vector<vector<int>>(nums.size(), vector<int>(3, -1));
         return solve(nums, 0, 0);
     }
 };
