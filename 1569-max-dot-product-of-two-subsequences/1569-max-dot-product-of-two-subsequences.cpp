@@ -10,6 +10,14 @@ public:
     }
     int maxDotProduct(vector<int>& nums1, vector<int>& nums2) {
         dp = vector<vector<int>> (501, vector<int>(501, INT_MIN));
-        return solve(nums1, 0, nums2, 0);
+        // return solve(nums1, 0, nums2, 0);
+        for(int i=1; i<=nums1.size(); i++) {
+            for(int j=1; j<=nums2.size(); j++) {
+                int take = nums1[i-1]*nums2[j-1] + max(0, dp[i-1][j-1]);
+                int nottake = max(dp[i-1][j-1], max(dp[i][j-1], dp[i-1][j]));
+                dp[i][j] = max(take, nottake);
+            }
+        }
+        return dp[nums1.size()][nums2.size()];
     }
 };
