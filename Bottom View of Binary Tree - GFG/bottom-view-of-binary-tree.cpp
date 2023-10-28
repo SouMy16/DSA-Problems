@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 #define MAX_HEIGHT 100000
@@ -90,48 +90,39 @@ Node* buildTree(string str)
 }
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 //Function to return a list containing the bottom view of the given tree.
 
 class Solution {
   public:
-  
-//   void BottomV(map<int,int> &bottom,int verti,int hor,Node* root,map<int,int> &hori)
-//     {
-//         if(root==NULL) return;
-//         if(bottom[verti]==0) bottom[verti]=root->data,hori[verti]=hor;
-//         if(bottom[verti]!=0 && hori[verti]<=hor) hori[verti]=hor,bottom[verti]=root->data;
-//         if(root->left!=NULL) BottomV(bottom,verti-1,hor+1,root->left,hori);
-//         if(root->right!=NULL) BottomV(bottom,verti+1,hor+1,root->right,hori);
-//         return;
-//     }
-    
-    vector<int> bottomView(Node *root)
-    {
-        //Your code here
-        vector<int> ans;
-        if(root == NULL) return ans;
-        map<int,int> m;
-        queue<pair<Node*,int> > q;
+    vector <int> bottomView(Node *root) {
+        // Your Code Here
+        queue<pair<Node*,int>> q;
+        map<int,int> mp;
         q.push({root,0});
-        while(!q.empty())
-        {
-            int verti = q.front().second;
-            Node * cur = q.front().first;
+        while(!q.empty()){
+            auto it = q.front();
             q.pop();
-            if(cur->left) q.push({cur->left , verti-1} );
-            if(cur->right) q.push({cur->right, verti+1} );
-            m[verti] = cur->data;
+            int a = it.second;
+            auto node = it.first;
+            mp[a] = node->data;
+            if(node->left){
+                q.push({node->left,a-1});
+            }
+            if(node->right){
+                q.push({node->right,a+1});
+            }
         }
-        for(map<int,int>::iterator it=m.begin(); it!=m.end(); it++)
-        {
-            ans.push_back(it->second);
+        vector<int> ans;
+        for(auto x:mp){
+            ans.push_back(x.second);
         }
         return ans;
+        
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main() {
     int t;
@@ -152,4 +143,5 @@ int main() {
 }
 
 
-  // } Driver Code Ends
+
+// } Driver Code Ends
