@@ -7,6 +7,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0040-combination-sum-ii](https://github.com/SouMy16/DSA-Problems/tree/master/0040-combination-sum-ii) |
+| [1333-sort-the-jumbled-numbers](https://github.com/SouMy16/DSA-Problems/tree/master/1333-sort-the-jumbled-numbers) |
 ## Backtracking
 |  |
 | ------- |
@@ -27,4 +28,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [2217-step-by-step-directions-from-a-binary-tree-node-to-another](https://github.com/SouMy16/DSA-Problems/tree/master/2217-step-by-step-directions-from-a-binary-tree-node-to-another) |
+## Sorting
+|  |
+| ------- |
+| [1333-sort-the-jumbled-numbers](https://github.com/SouMy16/DSA-Problems/tree/master/1333-sort-the-jumbled-numbers) |
 <!---LeetCode Topics End-->
