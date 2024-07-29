@@ -9,6 +9,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0040-combination-sum-ii](https://github.com/SouMy16/DSA-Problems/tree/master/0040-combination-sum-ii) |
 | [0948-sort-an-array](https://github.com/SouMy16/DSA-Problems/tree/master/0948-sort-an-array) |
 | [1333-sort-the-jumbled-numbers](https://github.com/SouMy16/DSA-Problems/tree/master/1333-sort-the-jumbled-numbers) |
+| [1511-count-number-of-teams](https://github.com/SouMy16/DSA-Problems/tree/master/1511-count-number-of-teams) |
 ## Backtracking
 |  |
 | ------- |
@@ -58,4 +59,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0948-sort-an-array](https://github.com/SouMy16/DSA-Problems/tree/master/0948-sort-an-array) |
+## Dynamic Programming
+|  |
+| ------- |
+| [1511-count-number-of-teams](https://github.com/SouMy16/DSA-Problems/tree/master/1511-count-number-of-teams) |
+## Binary Indexed Tree
+|  |
+| ------- |
+| [1511-count-number-of-teams](https://github.com/SouMy16/DSA-Problems/tree/master/1511-count-number-of-teams) |
 <!---LeetCode Topics End-->
